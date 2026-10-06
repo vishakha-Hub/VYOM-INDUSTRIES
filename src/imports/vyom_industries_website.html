@@ -1,0 +1,743 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vyom Industries — Electrical Distribution Solutions</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#0a0c0f;
+  --surface:#111418;
+  --card:#161b22;
+  --border:#1e2530;
+  --text:#dde2ea;
+  --muted:#6b7585;
+  --orange:#f57c20;
+  --orange-dim:#c4611a;
+  --blue:#1e4a8a;
+  --blue-bright:#2d6fd4;
+  --yellow:#f5c842;
+  --display:'Bebas Neue',Impact,sans-serif;
+  --sans:'DM Sans',sans-serif;
+}
+html{font-size:16px;scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:var(--sans);font-weight:300;line-height:1.7;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+
+/* ── NAV ── */
+nav{position:fixed;top:0;left:0;right:0;z-index:200;padding:0 4rem;height:68px;display:flex;align-items:center;justify-content:space-between;transition:background 0.4s,border-color 0.4s;border-bottom:1px solid transparent}
+nav.scrolled{background:rgba(10,12,15,0.96);backdrop-filter:blur(14px);border-color:var(--border)}
+.logo{display:flex;align-items:center;gap:0.75rem;text-decoration:none}
+.logo-mark{width:36px;height:36px;background:var(--orange);clip-path:polygon(50% 0%,100% 25%,100% 75%,50% 100%,0% 75%,0% 25%);display:flex;align-items:center;justify-content:center}
+.logo-mark span{font-family:var(--display);font-size:16px;color:#fff;letter-spacing:0}
+.logo-text{font-family:var(--display);font-size:1.4rem;letter-spacing:0.06em;color:var(--text)}
+.logo-text span{color:var(--orange)}
+.nav-links{display:flex;align-items:center;gap:2rem;list-style:none}
+.nav-links a{font-size:0.8rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);text-decoration:none;transition:color 0.3s}
+.nav-links a:hover{color:var(--orange)}
+.nav-cta{background:var(--orange);color:#fff!important;padding:0.5rem 1.25rem;border-radius:3px;font-weight:500!important;transition:background 0.3s!important}
+.nav-cta:hover{background:var(--orange-dim)!important}
+.nav-toggle{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:4px}
+.nav-toggle span{display:block;width:24px;height:2px;background:var(--text);transition:all 0.3s}
+
+/* ── HERO ── */
+.hero{min-height:100vh;position:relative;display:flex;align-items:center;overflow:hidden;padding:0 4rem}
+.hero-bg{position:absolute;inset:0;z-index:0}
+.circuit-svg{position:absolute;inset:0;width:100%;height:100%;opacity:0.06}
+.hero-glow{position:absolute;right:-10%;top:20%;width:700px;height:700px;background:radial-gradient(circle,rgba(245,124,32,0.12) 0%,transparent 65%);border-radius:50%}
+.hero-glow2{position:absolute;left:-5%;bottom:0%;width:500px;height:500px;background:radial-gradient(circle,rgba(30,74,138,0.15) 0%,transparent 65%);border-radius:50%}
+.diagonal-stripe{position:absolute;top:0;right:0;width:45%;height:100%;background:linear-gradient(135deg,transparent 0%,rgba(245,124,32,0.03) 50%,rgba(245,124,32,0.06) 100%);clip-path:polygon(15% 0,100% 0,100% 100%,0% 100%)}
+.hero-content{position:relative;z-index:1;max-width:760px}
+.hero-badge{display:inline-flex;align-items:center;gap:0.6rem;font-size:0.7rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--orange);margin-bottom:1.5rem;opacity:0;animation:fadeUp 0.7s 0.2s forwards}
+.hero-badge::before{content:'';width:28px;height:2px;background:var(--orange)}
+.hero h1{font-family:var(--display);font-size:clamp(4rem,9vw,9rem);line-height:0.92;letter-spacing:0.02em;color:var(--text);margin-bottom:1.5rem;opacity:0;animation:fadeUp 0.8s 0.35s forwards}
+.hero h1 .accent{color:var(--orange);display:block}
+.hero-sub{font-size:1.05rem;color:var(--muted);max-width:500px;margin-bottom:2.5rem;line-height:1.8;opacity:0;animation:fadeUp 0.8s 0.5s forwards}
+.hero-actions{display:flex;gap:1rem;flex-wrap:wrap;opacity:0;animation:fadeUp 0.8s 0.65s forwards}
+.btn-primary{background:var(--orange);color:#fff;padding:0.85rem 2rem;border-radius:3px;text-decoration:none;font-size:0.85rem;letter-spacing:0.08em;text-transform:uppercase;font-weight:500;transition:background 0.3s,transform 0.2s}
+.btn-primary:hover{background:var(--orange-dim);transform:translateY(-2px)}
+.btn-outline{border:1px solid var(--border);color:var(--text);padding:0.85rem 2rem;border-radius:3px;text-decoration:none;font-size:0.85rem;letter-spacing:0.08em;text-transform:uppercase;transition:border-color 0.3s,color 0.3s}
+.btn-outline:hover{border-color:var(--orange);color:var(--orange)}
+.hero-stats{position:absolute;bottom:3rem;right:4rem;display:flex;gap:3rem;opacity:0;animation:fadeUp 0.8s 0.8s forwards}
+.stat-item{text-align:right}
+.stat-num{font-family:var(--display);font-size:2.5rem;color:var(--orange);line-height:1}
+.stat-label{font-size:0.72rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted)}
+.scroll-indicator{position:absolute;bottom:2rem;left:4rem;display:flex;align-items:center;gap:0.75rem;font-size:0.68rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--muted);opacity:0;animation:fadeUp 0.8s 1s forwards}
+.scroll-line{width:40px;height:1px;background:var(--muted);position:relative;overflow:hidden}
+.scroll-line::after{content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;background:var(--orange);animation:slideLine 2s 1.5s infinite}
+
+/* ── SECTION COMMON ── */
+section{padding:7rem 4rem}
+.section-eyebrow{font-size:0.68rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--orange);margin-bottom:1.2rem;display:flex;align-items:center;gap:0.8rem}
+.section-eyebrow::before{content:'';width:20px;height:2px;background:var(--orange)}
+.section-title{font-family:var(--display);font-size:clamp(2.5rem,5vw,5rem);line-height:0.95;color:var(--text);margin-bottom:1.5rem;letter-spacing:0.02em}
+.section-title .line2{color:var(--orange)}
+
+/* ── ABOUT ── */
+#about{background:var(--surface);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.about-grid{display:grid;grid-template-columns:1fr 1.1fr;gap:6rem;align-items:start}
+.about-text p{color:var(--muted);line-height:1.9;font-size:0.98rem;margin-bottom:1.2rem}
+.vision-mission{margin-top:2.5rem;display:flex;flex-direction:column;gap:1.5rem}
+.vm-card{border-left:3px solid var(--orange);padding:1.2rem 1.5rem;background:var(--card);border-radius:0 6px 6px 0}
+.vm-card h4{font-family:var(--display);font-size:1.2rem;letter-spacing:0.05em;color:var(--orange);margin-bottom:0.5rem}
+.vm-card p{font-size:0.88rem;color:var(--muted);line-height:1.8}
+.why-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.why-card{background:var(--card);border:1px solid var(--border);border-radius:6px;padding:1.5rem;transition:border-color 0.3s,transform 0.3s}
+.why-card:hover{border-color:var(--orange);transform:translateY(-3px)}
+.why-icon{width:36px;height:36px;margin-bottom:0.8rem;display:flex;align-items:center;justify-content:center}
+.why-icon svg{width:24px;height:24px;stroke:var(--orange);fill:none;stroke-width:1.5}
+.why-card h4{font-size:0.88rem;font-weight:500;margin-bottom:0.4rem;color:var(--text)}
+.why-card p{font-size:0.8rem;color:var(--muted);line-height:1.7}
+
+/* ── PRODUCTS ── */
+#products{}
+.products-intro{max-width:640px;margin-bottom:4rem}
+.products-intro p{color:var(--muted);font-size:0.98rem;line-height:1.85}
+.product-filter{display:flex;gap:0.5rem;margin-bottom:3rem;flex-wrap:wrap}
+.filter-btn{font-size:0.72rem;letter-spacing:0.08em;text-transform:uppercase;padding:0.4rem 1rem;border-radius:100px;border:1px solid var(--border);background:none;color:var(--muted);cursor:pointer;transition:all 0.3s}
+.filter-btn.active,.filter-btn:hover{border-color:var(--orange);color:var(--orange);background:rgba(245,124,32,0.06)}
+.products-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem}
+.product-card{background:var(--card);border:1px solid var(--border);border-radius:8px;overflow:hidden;transition:border-color 0.3s,transform 0.4s}
+.product-card:hover{border-color:rgba(245,124,32,0.5);transform:translateY(-5px)}
+.product-visual{height:180px;background:var(--surface);display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;border-bottom:1px solid var(--border)}
+.product-visual svg{width:64px;height:64px;stroke:var(--border);fill:none;stroke-width:1;transition:stroke 0.3s}
+.product-card:hover .product-visual svg{stroke:var(--orange)}
+.product-visual-bg{position:absolute;inset:0;background:linear-gradient(135deg,transparent 60%,rgba(245,124,32,0.04));transition:opacity 0.3s}
+.product-card:hover .product-visual-bg{opacity:3}
+.product-tag{position:absolute;top:12px;left:12px;font-size:0.62rem;letter-spacing:0.1em;text-transform:uppercase;background:rgba(245,124,32,0.12);color:var(--orange);padding:3px 8px;border-radius:3px}
+.product-info{padding:1.5rem}
+.product-name{font-family:var(--display);font-size:1.3rem;letter-spacing:0.03em;margin-bottom:0.5rem;color:var(--text)}
+.product-desc{font-size:0.82rem;color:var(--muted);line-height:1.75;margin-bottom:1.2rem}
+.product-cta{font-size:0.72rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--orange);text-decoration:none;display:flex;align-items:center;gap:0.4rem;transition:gap 0.3s}
+.product-card:hover .product-cta{gap:0.8rem}
+
+/* ── SERVICES ── */
+#services{background:var(--surface);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.services-layout{display:grid;grid-template-columns:1fr 1.4fr;gap:6rem;align-items:start}
+.services-list{display:flex;flex-direction:column;gap:0}
+.service-item{padding:1.8rem 0;border-bottom:1px solid var(--border);cursor:pointer;transition:all 0.3s}
+.service-item:first-child{border-top:1px solid var(--border)}
+.service-item-header{display:flex;align-items:center;justify-content:space-between;gap:1rem}
+.service-num{font-family:var(--display);font-size:1.8rem;color:var(--border);line-height:1;transition:color 0.3s;min-width:48px}
+.service-item.active .service-num,.service-item:hover .service-num{color:var(--orange)}
+.service-name{font-size:0.98rem;font-weight:500;color:var(--text)}
+.service-arrow{color:var(--muted);transition:transform 0.3s,color 0.3s;font-size:1.2rem}
+.service-item.active .service-arrow,.service-item:hover .service-arrow{color:var(--orange);transform:translateX(4px)}
+.service-body{max-height:0;overflow:hidden;transition:max-height 0.4s ease}
+.service-item.active .service-body{max-height:200px}
+.service-body p{font-size:0.88rem;color:var(--muted);line-height:1.8;padding-top:0.8rem}
+.service-showcase{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:3rem;position:sticky;top:100px}
+.service-showcase-icon{width:64px;height:64px;border-radius:12px;background:rgba(245,124,32,0.1);display:flex;align-items:center;justify-content:center;margin-bottom:1.5rem}
+.service-showcase-icon svg{width:32px;height:32px;stroke:var(--orange);fill:none;stroke-width:1.5}
+.service-showcase h3{font-family:var(--display);font-size:2rem;letter-spacing:0.03em;margin-bottom:1rem}
+.service-showcase p{font-size:0.9rem;color:var(--muted);line-height:1.85;margin-bottom:2rem}
+.service-features{display:flex;flex-direction:column;gap:0.6rem}
+.service-feature{display:flex;align-items:center;gap:0.75rem;font-size:0.85rem;color:var(--text)}
+.service-feature::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--orange);flex-shrink:0}
+
+/* ── WHY BANNER ── */
+.why-banner{background:var(--orange);padding:5rem 4rem;position:relative;overflow:hidden}
+.why-banner-bg{position:absolute;inset:0;opacity:0.05}
+.why-banner-bg svg{width:100%;height:100%}
+.why-banner-inner{position:relative;z-index:1;display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center}
+.why-banner h2{font-family:var(--display);font-size:clamp(2.5rem,5vw,5rem);line-height:0.95;color:#fff}
+.why-banner-stats{display:grid;grid-template-columns:1fr 1fr;gap:2rem}
+.wb-stat{border-left:3px solid rgba(255,255,255,0.3);padding-left:1.2rem}
+.wb-stat-num{font-family:var(--display);font-size:3rem;color:#fff;line-height:1}
+.wb-stat-label{font-size:0.78rem;letter-spacing:0.08em;text-transform:uppercase;color:rgba(255,255,255,0.7)}
+
+/* ── CONTACT ── */
+#contact{background:var(--surface);border-top:1px solid var(--border)}
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:6rem;align-items:start}
+.contact-info{display:flex;flex-direction:column;gap:2rem}
+.contact-detail{display:flex;gap:1.2rem;align-items:flex-start}
+.contact-icon{width:44px;height:44px;background:var(--card);border:1px solid var(--border);border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.contact-icon svg{width:20px;height:20px;stroke:var(--orange);fill:none;stroke-width:1.5}
+.contact-label{font-size:0.68rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);margin-bottom:0.25rem}
+.contact-value{font-size:0.95rem;color:var(--text)}
+.contact-form{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:2.5rem}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1rem}
+.form-group{display:flex;flex-direction:column;gap:0.4rem;margin-bottom:1rem}
+.form-group label{font-size:0.72rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted)}
+.form-group input,.form-group textarea,.form-group select{background:var(--surface);border:1px solid var(--border);border-radius:4px;padding:0.75rem 1rem;color:var(--text);font-family:var(--sans);font-size:0.9rem;transition:border-color 0.3s;outline:none;resize:none}
+.form-group input:focus,.form-group textarea:focus,.form-group select:focus{border-color:var(--orange)}
+.form-group textarea{min-height:120px}
+.form-group select option{background:var(--surface)}
+.form-submit{width:100%;background:var(--orange);color:#fff;border:none;padding:1rem;border-radius:4px;font-family:var(--sans);font-size:0.85rem;letter-spacing:0.1em;text-transform:uppercase;font-weight:500;cursor:pointer;transition:background 0.3s}
+.form-submit:hover{background:var(--orange-dim)}
+
+/* ── FOOTER ── */
+footer{background:var(--bg);border-top:1px solid var(--border);padding:3rem 4rem 2rem}
+.footer-top{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:3rem;margin-bottom:3rem}
+.footer-brand p{font-size:0.85rem;color:var(--muted);line-height:1.8;max-width:280px;margin-top:0.75rem}
+.footer-col h4{font-size:0.68rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--orange);margin-bottom:1rem}
+.footer-col ul{list-style:none;display:flex;flex-direction:column;gap:0.6rem}
+.footer-col ul a{font-size:0.85rem;color:var(--muted);text-decoration:none;transition:color 0.3s}
+.footer-col ul a:hover{color:var(--orange)}
+.footer-bottom{border-top:1px solid var(--border);padding-top:1.5rem;display:flex;justify-content:space-between;font-size:0.75rem;color:var(--muted)}
+
+/* ── ANIMATIONS ── */
+@keyframes fadeUp{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:translateY(0)}}
+@keyframes slideLine{from{left:-100%}to{left:100%}}
+.reveal{opacity:0;transform:translateY(28px);transition:opacity 0.65s ease,transform 0.65s ease}
+.reveal.visible{opacity:1;transform:none}
+.reveal-d1{transition-delay:0.1s}.reveal-d2{transition-delay:0.2s}.reveal-d3{transition-delay:0.3s}
+
+/* ── MOBILE NAV ── */
+.mobile-menu{display:none;position:fixed;inset:0;background:var(--bg);z-index:190;flex-direction:column;align-items:center;justify-content:center;gap:2.5rem}
+.mobile-menu.open{display:flex}
+.mobile-menu a{font-family:var(--display);font-size:2.5rem;letter-spacing:0.06em;color:var(--text);text-decoration:none;transition:color 0.3s}
+.mobile-menu a:hover{color:var(--orange)}
+
+/* ── RESPONSIVE ── */
+@media(max-width:1024px){
+  nav{padding:0 2rem}
+  .hero{padding:0 2rem}
+  section{padding:5rem 2rem}
+  .about-grid,.services-layout,.contact-grid,.footer-top{grid-template-columns:1fr}
+  .why-banner-inner{grid-template-columns:1fr}
+  .why-banner{padding:4rem 2rem}
+  .products-grid{grid-template-columns:1fr 1fr}
+  footer{padding:3rem 2rem 2rem}
+  .footer-bottom{flex-direction:column;gap:0.5rem}
+  .hero-stats{position:static;margin-top:3rem;justify-content:flex-start}
+  .scroll-indicator{display:none}
+}
+@media(max-width:680px){
+  .nav-links{display:none}
+  .nav-toggle{display:flex}
+  .products-grid{grid-template-columns:1fr}
+  .form-row{grid-template-columns:1fr}
+  .why-grid{grid-template-columns:1fr}
+  .why-banner-stats{grid-template-columns:1fr 1fr}
+  .footer-top{grid-template-columns:1fr 1fr}
+}
+</style>
+</head>
+<body>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#home" onclick="closeMobile()">Home</a>
+  <a href="#about" onclick="closeMobile()">About</a>
+  <a href="#products" onclick="closeMobile()">Products</a>
+  <a href="#services" onclick="closeMobile()">Services</a>
+  <a href="#contact" onclick="closeMobile()">Contact</a>
+</div>
+
+<!-- NAV -->
+<nav id="navbar">
+  <a href="#home" class="logo">
+    <div class="logo-mark"><span>V</span></div>
+    <span class="logo-text">VYOM <span>INDUSTRIES</span></span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#home">Home</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#products">Products</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#contact" class="nav-cta">Request Quote</a></li>
+  </ul>
+  <button class="nav-toggle" onclick="toggleMobile()" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-bg">
+    <svg class="circuit-svg" viewBox="0 0 1440 900" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M0 200 H300 L340 160 H600 L640 200 H900 L940 240 H1200 L1240 200 H1440" stroke="#f57c20" stroke-width="1"/>
+      <path d="M0 500 H200 L240 460 H500 L540 500 H800 L840 540 H1100 L1140 500 H1440" stroke="#f57c20" stroke-width="1"/>
+      <path d="M200 0 V200 M600 0 V160 M1000 0 V240 M1300 0 V200" stroke="#f57c20" stroke-width="1"/>
+      <path d="M340 160 V80 M640 200 V120 M940 240 V120 M1240 200 V80" stroke="#f57c20" stroke-width="0.5"/>
+      <circle cx="300" cy="200" r="5" fill="#f57c20"/>
+      <circle cx="600" cy="160" r="5" fill="#f57c20"/>
+      <circle cx="900" cy="200" r="5" fill="#f57c20"/>
+      <circle cx="1200" cy="240" r="5" fill="#f57c20"/>
+      <circle cx="200" cy="500" r="4" fill="#f57c20"/>
+      <circle cx="500" cy="460" r="4" fill="#f57c20"/>
+      <circle cx="800" cy="500" r="4" fill="#f57c20"/>
+      <circle cx="1100" cy="540" r="4" fill="#f57c20"/>
+      <rect x="196" y="196" width="8" height="8" fill="none" stroke="#f57c20" stroke-width="1"/>
+      <rect x="596" y="156" width="8" height="8" fill="none" stroke="#f57c20" stroke-width="1"/>
+      <rect x="896" y="196" width="8" height="8" fill="none" stroke="#f57c20" stroke-width="1"/>
+    </svg>
+    <div class="hero-glow"></div>
+    <div class="hero-glow2"></div>
+    <div class="diagonal-stripe"></div>
+  </div>
+  <div class="hero-content">
+    <div class="hero-badge">Est. 2018 · Pune, Maharashtra, India</div>
+    <h1>POWER<br>YOUR<br><span class="accent">WORLD</span></h1>
+    <p class="hero-sub">High-quality electrical distribution boards and control panels for industrial and residential applications. Built for precision. Built to last.</p>
+    <div class="hero-actions">
+      <a href="#products" class="btn-primary">Explore Products</a>
+      <a href="#contact" class="btn-outline">Request a Quote</a>
+    </div>
+    <div class="hero-stats">
+      <div class="stat-item"><div class="stat-num">9+</div><div class="stat-label">Product Lines</div></div>
+      <div class="stat-item"><div class="stat-num">5</div><div class="stat-label">Expert Services</div></div>
+      <div class="stat-item"><div class="stat-num">2018</div><div class="stat-label">Founded</div></div>
+    </div>
+  </div>
+  <div class="scroll-indicator"><span class="scroll-line"></span>Scroll</div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="about-grid">
+    <div class="reveal">
+      <div class="section-eyebrow">About Us</div>
+      <h2 class="section-title">ELECTRICAL<br><span class="line2">EXCELLENCE</span></h2>
+      <p>Founded in 2018, Vyom Industries is a forward-thinking company specializing in the manufacturing and supply of high-quality electrical distribution products. We cater to diverse industries by offering reliable, innovative, and durable solutions for efficient power management.</p>
+      <p>With a commitment to safety and precision, Vyom Industries is the partner you can trust for all your electrical distribution needs — from residential setups to large-scale industrial installations.</p>
+      <div class="vision-mission">
+        <div class="vm-card">
+          <h4>Our Vision</h4>
+          <p>To be a global leader in providing reliable, innovative, and sustainable electrical distribution solutions, empowering industries with the highest standards of safety, efficiency, and performance.</p>
+        </div>
+        <div class="vm-card">
+          <h4>Our Mission</h4>
+          <p>To manufacture and deliver top-notch electrical distribution products, invest in research and innovation, provide exceptional customer service, and foster a culture of sustainability and integrity.</p>
+        </div>
+      </div>
+    </div>
+    <div class="reveal reveal-d1">
+      <div class="section-eyebrow">Why Choose Us</div>
+      <h3 style="font-family:var(--display);font-size:2rem;letter-spacing:0.03em;margin-bottom:1.5rem;color:var(--text)">SIX REASONS TO TRUST VYOM</h3>
+      <div class="why-grid">
+        <div class="why-card">
+          <div class="why-icon"><svg viewBox="0 0 24 24"><path d="M9 12l2 2 4-4M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg></div>
+          <h4>Commitment to Quality</h4>
+          <p>Stringent quality control tests on every product for maximum safety and reliability.</p>
+        </div>
+        <div class="why-card">
+          <div class="why-icon"><svg viewBox="0 0 24 24"><path d="M13 10V3L4 14h7v7l9-11h-7z"/></svg></div>
+          <h4>Innovation & Expertise</h4>
+          <p>Latest technology combined with deep industry expertise for advanced, cost-effective solutions.</p>
+        </div>
+        <div class="why-card">
+          <div class="why-icon"><svg viewBox="0 0 24 24"><path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/><path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/></svg></div>
+          <h4>Tailored Solutions</h4>
+          <p>Custom-designed products for every scale — from small setups to large industrial projects.</p>
+        </div>
+        <div class="why-card">
+          <div class="why-icon"><svg viewBox="0 0 24 24"><path d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/></svg></div>
+          <h4>Customer-Centric</h4>
+          <p>Transparency, timely delivery, and strong after-sales support building long-term trust.</p>
+        </div>
+        <div class="why-card">
+          <div class="why-icon"><svg viewBox="0 0 24 24"><path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg></div>
+          <h4>Reliability & Timeliness</h4>
+          <p>On-time delivery commitment ensuring your projects are never delayed.</p>
+        </div>
+        <div class="why-card">
+          <div class="why-icon"><svg viewBox="0 0 24 24"><path d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064"/></svg></div>
+          <h4>Sustainability</h4>
+          <p>Energy-efficient products that minimize environmental impact and optimize usage.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRODUCTS -->
+<section id="products">
+  <div class="section-eyebrow reveal">Our Products</div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:2rem;align-items:end;margin-bottom:3rem">
+    <h2 class="section-title reveal">DISTRIBUTION<br><span class="line2">SOLUTIONS</span></h2>
+    <p class="reveal reveal-d1" style="color:var(--muted);font-size:0.98rem;line-height:1.85">A comprehensive range of high-quality electrical distribution boards and control panels for industrial and residential applications — engineered for performance, durability, and safety.</p>
+  </div>
+
+  <div class="products-grid">
+    <div class="product-card reveal">
+      <div class="product-visual">
+        <div class="product-visual-bg"></div>
+        <span class="product-tag">Industrial</span>
+        <svg viewBox="0 0 80 80"><rect x="10" y="15" width="60" height="50" rx="3" stroke-width="1.5"/><line x1="10" y1="28" x2="70" y2="28" stroke-width="1"/><rect x="16" y="34" width="10" height="8" rx="1" stroke-width="1"/><rect x="30" y="34" width="10" height="8" rx="1" stroke-width="1"/><rect x="44" y="34" width="10" height="8" rx="1" stroke-width="1"/><line x1="20" y1="50" x2="20" y2="58" stroke-width="1.5"/><line x1="40" y1="50" x2="40" y2="58" stroke-width="1.5"/><line x1="60" y1="50" x2="60" y2="58" stroke-width="1.5"/></svg>
+      </div>
+      <div class="product-info">
+        <div class="product-name">Power Distribution Boards</div>
+        <p class="product-desc">Reliable and safe distribution of electricity, designed for high performance and long-lasting durability across demanding environments.</p>
+        <a href="#contact" class="product-cta">Request Quote →</a>
+      </div>
+    </div>
+
+    <div class="product-card reveal reveal-d1">
+      <div class="product-visual">
+        <div class="product-visual-bg"></div>
+        <span class="product-tag">Multi-use</span>
+        <svg viewBox="0 0 80 80"><rect x="8" y="10" width="64" height="60" rx="3" stroke-width="1.5"/><line x1="8" y1="24" x2="72" y2="24" stroke-width="1"/><rect x="14" y="30" width="8" height="12" rx="1" stroke-width="1"/><rect x="26" y="30" width="8" height="12" rx="1" stroke-width="1"/><rect x="38" y="30" width="8" height="12" rx="1" stroke-width="1"/><rect x="50" y="30" width="8" height="12" rx="1" stroke-width="1"/><rect x="14" y="50" width="52" height="8" rx="2" stroke-width="1"/></svg>
+      </div>
+      <div class="product-info">
+        <div class="product-name">Electrical Distribution Boards</div>
+        <p class="product-desc">Built to handle electrical systems with efficiency and reliability, offering protection and control for a wide variety of applications.</p>
+        <a href="#contact" class="product-cta">Request Quote →</a>
+      </div>
+    </div>
+
+    <div class="product-card reveal reveal-d2">
+      <div class="product-visual">
+        <div class="product-visual-bg"></div>
+        <span class="product-tag">Premium</span>
+        <svg viewBox="0 0 80 80"><rect x="12" y="12" width="56" height="56" rx="4" stroke-width="1.5"/><circle cx="40" cy="40" r="12" stroke-width="1.5"/><circle cx="40" cy="40" r="4" stroke-width="1.5"/><line x1="40" y1="12" x2="40" y2="28" stroke-width="1"/><line x1="40" y1="52" x2="40" y2="68" stroke-width="1"/><line x1="12" y1="40" x2="28" y2="40" stroke-width="1"/><line x1="52" y1="40" x2="68" y2="40" stroke-width="1"/></svg>
+      </div>
+      <div class="product-info">
+        <div class="product-name">Legrand Distribution Boards</div>
+        <p class="product-desc">Premium boards featuring advanced Legrand technology — superior performance and safety, ideal for commercial and industrial environments.</p>
+        <a href="#contact" class="product-cta">Request Quote →</a>
+      </div>
+    </div>
+
+    <div class="product-card reveal">
+      <div class="product-visual">
+        <div class="product-visual-bg"></div>
+        <span class="product-tag">Versatile</span>
+        <svg viewBox="0 0 80 80"><rect x="6" y="6" width="68" height="68" rx="3" stroke-width="1.5"/><rect x="14" y="14" width="24" height="24" rx="2" stroke-width="1"/><rect x="42" y="14" width="24" height="24" rx="2" stroke-width="1"/><rect x="14" y="42" width="24" height="24" rx="2" stroke-width="1"/><rect x="42" y="42" width="24" height="24" rx="2" stroke-width="1"/></svg>
+      </div>
+      <div class="product-info">
+        <div class="product-name">Distribution Panel Boards</div>
+        <p class="product-desc">Optimal power distribution with both versatility and robust functionality, meeting the demands of complex electrical systems.</p>
+        <a href="#contact" class="product-cta">Request Quote →</a>
+      </div>
+    </div>
+
+    <div class="product-card reveal reveal-d1">
+      <div class="product-visual">
+        <div class="product-visual-bg"></div>
+        <span class="product-tag">Safety</span>
+        <svg viewBox="0 0 80 80"><rect x="20" y="8" width="40" height="64" rx="4" stroke-width="1.5"/><rect x="26" y="16" width="28" height="4" rx="1" stroke-width="1"/><rect x="26" y="24" width="28" height="4" rx="1" stroke-width="1"/><rect x="26" y="32" width="28" height="4" rx="1" stroke-width="1"/><circle cx="40" cy="52" r="8" stroke-width="1.5"/><path d="M36 52l3 3 6-6" stroke-width="1.5"/></svg>
+      </div>
+      <div class="product-info">
+        <div class="product-name">MCB Distribution Boards</div>
+        <p class="product-desc">Miniature Circuit Breaker boards providing essential protection against overcurrents and short circuits for electrical circuit safety.</p>
+        <a href="#contact" class="product-cta">Request Quote →</a>
+      </div>
+    </div>
+
+    <div class="product-card reveal reveal-d2">
+      <div class="product-visual">
+        <div class="product-visual-bg"></div>
+        <span class="product-tag">3-Phase</span>
+        <svg viewBox="0 0 80 80"><path d="M40 8 L70 26 L70 54 L40 72 L10 54 L10 26 Z" stroke-width="1.5"/><path d="M40 20 L58 30 L58 50 L40 60 L22 50 L22 30 Z" stroke-width="1"/><circle cx="40" cy="40" r="6" stroke-width="1.5"/></svg>
+      </div>
+      <div class="product-info">
+        <div class="product-name">TPN Distribution Boards</div>
+        <p class="product-desc">Three-Phase Neutral distribution boards designed for high-efficiency applications, providing uninterrupted power flow for industrial operations.</p>
+        <a href="#contact" class="product-cta">Request Quote →</a>
+      </div>
+    </div>
+
+    <div class="product-card reveal">
+      <div class="product-visual">
+        <div class="product-visual-bg"></div>
+        <span class="product-tag">Premium+</span>
+        <svg viewBox="0 0 80 80"><rect x="10" y="18" width="60" height="44" rx="3" stroke-width="1.5"/><line x1="10" y1="30" x2="70" y2="30" stroke-width="1"/><rect x="16" y="36" width="6" height="10" rx="1" stroke-width="1"/><rect x="26" y="36" width="6" height="10" rx="1" stroke-width="1"/><rect x="36" y="36" width="6" height="10" rx="1" stroke-width="1"/><rect x="46" y="36" width="6" height="10" rx="1" stroke-width="1"/><path d="M56 36 L62 41 L56 46" stroke-width="1.5"/></svg>
+      </div>
+      <div class="product-info">
+        <div class="product-name">Legrand MCB Distribution Boards</div>
+        <p class="product-desc">Combining Legrand's trusted technology with MCB safety features for maximum reliability and protection in electrical systems.</p>
+        <a href="#contact" class="product-cta">Request Quote →</a>
+      </div>
+    </div>
+
+    <div class="product-card reveal reveal-d1">
+      <div class="product-visual">
+        <div class="product-visual-bg"></div>
+        <span class="product-tag">Industrial</span>
+        <svg viewBox="0 0 80 80"><rect x="8" y="8" width="64" height="64" rx="4" stroke-width="1.5"/><rect x="16" y="16" width="20" height="20" rx="2" stroke-width="1"/><rect x="44" y="16" width="20" height="20" rx="2" stroke-width="1"/><rect x="16" y="44" width="48" height="20" rx="2" stroke-width="1"/><circle cx="26" cy="54" r="4" stroke-width="1"/><circle cx="54" cy="54" r="4" stroke-width="1"/></svg>
+      </div>
+      <div class="product-info">
+        <div class="product-name">Electric Control Panels</div>
+        <p class="product-desc">Efficient electric control panels essential for the automated operation of machinery and complex industrial systems.</p>
+        <a href="#contact" class="product-cta">Request Quote →</a>
+      </div>
+    </div>
+
+    <div class="product-card reveal reveal-d2">
+      <div class="product-visual">
+        <div class="product-visual-bg"></div>
+        <span class="product-tag">Commercial</span>
+        <svg viewBox="0 0 80 80"><rect x="10" y="10" width="60" height="60" rx="4" stroke-width="1.5"/><rect x="18" y="18" width="44" height="14" rx="2" stroke-width="1"/><rect x="18" y="36" width="18" height="18" rx="2" stroke-width="1"/><rect x="44" y="36" width="18" height="18" rx="2" stroke-width="1"/><line x1="18" y1="60" x2="62" y2="60" stroke-width="1"/></svg>
+      </div>
+      <div class="product-info">
+        <div class="product-name">Control Panels</div>
+        <p class="product-desc">Designed for industrial and commercial purposes — ensuring smooth operations, efficient energy use, and enhanced safety across facilities.</p>
+        <a href="#contact" class="product-cta">Request Quote →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="section-eyebrow reveal">Our Services</div>
+  <div class="services-layout">
+    <div>
+      <h2 class="section-title reveal">END-TO-END<br><span class="line2">SUPPORT</span></h2>
+      <div class="services-list" id="servicesList">
+
+        <div class="service-item active" onclick="toggleService(this, 0)">
+          <div class="service-item-header">
+            <div style="display:flex;align-items:center;gap:1rem"><span class="service-num">01</span><span class="service-name">Customized Electrical Solutions</span></div>
+            <span class="service-arrow">→</span>
+          </div>
+          <div class="service-body"><p>Every project has unique requirements. Vyom Industries offers custom-designed electrical distribution boards and control panels tailored to meet your specific needs — whether for small residential setups or large-scale industrial projects.</p></div>
+        </div>
+
+        <div class="service-item" onclick="toggleService(this, 1)">
+          <div class="service-item-header">
+            <div style="display:flex;align-items:center;gap:1rem"><span class="service-num">02</span><span class="service-name">Installation &amp; Commissioning</span></div>
+            <span class="service-arrow">→</span>
+          </div>
+          <div class="service-body"><p>Our team of experts provides professional installation and commissioning services, ensuring that your electrical systems are set up safely, efficiently, and to the highest technical standards.</p></div>
+        </div>
+
+        <div class="service-item" onclick="toggleService(this, 2)">
+          <div class="service-item-header">
+            <div style="display:flex;align-items:center;gap:1rem"><span class="service-num">03</span><span class="service-name">Consultation &amp; Design</span></div>
+            <span class="service-arrow">→</span>
+          </div>
+          <div class="service-body"><p>Setting up a new electrical system or upgrading an existing one? Our engineers offer expert consultation to design systems that are reliable, safe, and cost-effective for your specific environment.</p></div>
+        </div>
+
+        <div class="service-item" onclick="toggleService(this, 3)">
+          <div class="service-item-header">
+            <div style="display:flex;align-items:center;gap:1rem"><span class="service-num">04</span><span class="service-name">After-Sales Support</span></div>
+            <span class="service-arrow">→</span>
+          </div>
+          <div class="service-body"><p>We believe in long-term customer satisfaction. Our after-sales services include troubleshooting, product maintenance, and technical support to ensure the continued performance of your electrical systems.</p></div>
+        </div>
+
+        <div class="service-item" onclick="toggleService(this, 4)">
+          <div class="service-item-header">
+            <div style="display:flex;align-items:center;gap:1rem"><span class="service-num">05</span><span class="service-name">Maintenance Services</span></div>
+            <span class="service-arrow">→</span>
+          </div>
+          <div class="service-body"><p>Regular maintenance is key to longevity. We offer scheduled maintenance services to ensure your distribution boards and control panels operate at peak efficiency throughout their lifecycle.</p></div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="service-showcase reveal reveal-d2" id="serviceShowcase">
+      <div class="service-showcase-icon">
+        <svg viewBox="0 0 24 24"><path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/><path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+      </div>
+      <h3>Customized Electrical Solutions</h3>
+      <p>We understand that every project has unique requirements. Vyom Industries works closely with clients to design and deliver electrical distribution solutions precisely tailored to their specifications and budget.</p>
+      <div class="service-features">
+        <span class="service-feature">Site assessment and requirement analysis</span>
+        <span class="service-feature">Custom board and panel design</span>
+        <span class="service-feature">Industrial and residential expertise</span>
+        <span class="service-feature">Scalable from small to large projects</span>
+      </div>
+      <div style="margin-top:2rem"><a href="#contact" class="btn-primary" style="display:inline-block">Request Consultation</a></div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY BANNER -->
+<div class="why-banner">
+  <div class="why-banner-inner">
+    <div>
+      <h2>TRUSTED BY INDUSTRY.<br>BUILT FOR RELIABILITY.</h2>
+      <p style="color:rgba(255,255,255,0.8);margin-top:1.5rem;max-width:400px;line-height:1.8">From Pune to projects across Maharashtra, Vyom Industries delivers electrical distribution solutions that power industries, protect assets, and enable growth.</p>
+      <a href="#contact" style="display:inline-flex;align-items:center;gap:0.5rem;margin-top:2rem;color:#fff;font-size:0.82rem;letter-spacing:0.1em;text-transform:uppercase;text-decoration:none;border-bottom:1px solid rgba(255,255,255,0.4);padding-bottom:4px">Get in Touch →</a>
+    </div>
+    <div class="why-banner-stats">
+      <div class="wb-stat"><div class="wb-stat-num">9+</div><div class="wb-stat-label">Product Lines</div></div>
+      <div class="wb-stat"><div class="wb-stat-num">5</div><div class="wb-stat-label">Services Offered</div></div>
+      <div class="wb-stat"><div class="wb-stat-num">100%</div><div class="wb-stat-label">Quality Tested</div></div>
+      <div class="wb-stat"><div class="wb-stat-num">2018</div><div class="wb-stat-label">Year Founded</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-eyebrow reveal">Contact Us</div>
+  <div class="contact-grid">
+    <div class="reveal">
+      <h2 class="section-title">LET'S POWER<br><span class="line2">YOUR PROJECT</span></h2>
+      <p style="color:var(--muted);margin-bottom:3rem;line-height:1.85">Whether you need a standard product or a fully customized solution, we are ready to assist you. Get in touch today and let us help you power your world with precision and reliability.</p>
+      <div class="contact-info">
+        <div class="contact-detail">
+          <div class="contact-icon"><svg viewBox="0 0 24 24"><path d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg></div>
+          <div><div class="contact-label">Phone</div><div class="contact-value">+91 9096655527</div></div>
+        </div>
+        <div class="contact-detail">
+          <div class="contact-icon"><svg viewBox="0 0 24 24"><path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg></div>
+          <div><div class="contact-label">Email</div><div class="contact-value">hiharshal.p@gmail.com</div></div>
+        </div>
+        <div class="contact-detail">
+          <div class="contact-icon"><svg viewBox="0 0 24 24"><path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg></div>
+          <div><div class="contact-label">Address</div><div class="contact-value">Plot No 372, Sector No 1, Indrayani Nagar,<br>Near Siddivinayal Temple, Bhosari,<br>Pimpri Chinchwad, Pune — 411026<br>Maharashtra, India</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="contact-form reveal reveal-d1">
+      <h3 style="font-family:var(--display);font-size:1.8rem;letter-spacing:0.03em;margin-bottom:1.5rem">REQUEST A QUOTE</h3>
+      <div class="form-row">
+        <div class="form-group"><label>First Name</label><input type="text" placeholder="Rahul"/></div>
+        <div class="form-group"><label>Last Name</label><input type="text" placeholder="Sharma"/></div>
+      </div>
+      <div class="form-group"><label>Email Address</label><input type="email" placeholder="rahul@company.com"/></div>
+      <div class="form-group"><label>Phone Number</label><input type="tel" placeholder="+91 9876543210"/></div>
+      <div class="form-group">
+        <label>Product / Service Interest</label>
+        <select>
+          <option value="">Select an option...</option>
+          <option>Power Distribution Boards</option>
+          <option>Electrical Distribution Boards</option>
+          <option>Legrand Distribution Boards</option>
+          <option>MCB Distribution Boards</option>
+          <option>TPN Distribution Boards</option>
+          <option>Electric Control Panels</option>
+          <option>Control Panels</option>
+          <option>Customized Solutions</option>
+          <option>Installation & Commissioning</option>
+          <option>Consultation & Design</option>
+          <option>Maintenance Services</option>
+        </select>
+      </div>
+      <div class="form-group"><label>Message</label><textarea placeholder="Tell us about your project requirements..."></textarea></div>
+      <button class="form-submit" onclick="handleSubmit(this)">Send Request →</button>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <a href="#home" class="logo" style="margin-bottom:0.75rem;display:inline-flex">
+        <div class="logo-mark"><span>V</span></div>
+        <span class="logo-text" style="margin-left:0.75rem">VYOM <span>INDUSTRIES</span></span>
+      </a>
+      <p>High-quality electrical distribution boards and control panels for industrial and residential applications. Founded 2018, Pune, India.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Products</h4>
+      <ul>
+        <li><a href="#products">Power Distribution Boards</a></li>
+        <li><a href="#products">Electrical Distribution Boards</a></li>
+        <li><a href="#products">Legrand Distribution Boards</a></li>
+        <li><a href="#products">MCB Distribution Boards</a></li>
+        <li><a href="#products">TPN Distribution Boards</a></li>
+        <li><a href="#products">Control Panels</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Services</h4>
+      <ul>
+        <li><a href="#services">Customized Solutions</a></li>
+        <li><a href="#services">Installation & Commissioning</a></li>
+        <li><a href="#services">Consultation & Design</a></li>
+        <li><a href="#services">After-Sales Support</a></li>
+        <li><a href="#services">Maintenance Services</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Company</h4>
+      <ul>
+        <li><a href="#about">About Us</a></li>
+        <li><a href="#about">Vision & Mission</a></li>
+        <li><a href="#about">Why Vyom Industries</a></li>
+        <li><a href="#contact">Contact Us</a></li>
+        <li><a href="#contact">Request a Quote</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 Vyom Industries. All rights reserved. Pune, Maharashtra, India.</span>
+    <span>+91 9096655527 · hiharshal.p@gmail.com</span>
+  </div>
+</footer>
+
+<script>
+// Nav scroll
+const navbar = document.getElementById('navbar');
+window.addEventListener('scroll', () => navbar.classList.toggle('scrolled', window.scrollY > 50));
+
+// Mobile menu
+function toggleMobile(){document.getElementById('mobileMenu').classList.toggle('open')}
+function closeMobile(){document.getElementById('mobileMenu').classList.remove('open')}
+
+// Reveal on scroll
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); });
+}, {threshold: 0.1});
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+// Services accordion
+const serviceData = [
+  {
+    title: "Customized Electrical Solutions",
+    icon: `<path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/><path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>`,
+    desc: "We understand that every project has unique requirements. Vyom Industries works closely with clients to design and deliver electrical distribution solutions precisely tailored to their specifications and budget.",
+    features: ["Site assessment and requirement analysis","Custom board and panel design","Industrial and residential expertise","Scalable from small to large projects"]
+  },
+  {
+    title: "Installation & Commissioning",
+    icon: `<path d="M11 4a2 2 0 114 0v1a1 1 0 001 1h3a1 1 0 011 1v3a1 1 0 01-1 1h-1a2 2 0 100 4h1a1 1 0 011 1v3a1 1 0 01-1 1h-3a1 1 0 01-1-1v-1a2 2 0 10-4 0v1a1 1 0 01-1 1H7a1 1 0 01-1-1v-3a1 1 0 00-1-1H4a2 2 0 110-4h1a1 1 0 001-1V7a1 1 0 011-1h3a1 1 0 001-1V4z"/>`,
+    desc: "Our team of experts provides professional installation and commissioning services, ensuring that your electrical systems are set up safely, efficiently, and to the highest technical standards.",
+    features: ["Expert field installation team","Full commissioning and testing","Safety compliance verification","Handover documentation provided"]
+  },
+  {
+    title: "Consultation & Design",
+    icon: `<path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"/>`,
+    desc: "Setting up a new electrical system or upgrading an existing one? Our engineers offer expert consultation to design systems that are reliable, safe, and cost-effective for your specific environment.",
+    features: ["Free initial consultation","System design and planning","Code compliance review","Cost-benefit analysis"]
+  },
+  {
+    title: "After-Sales Support",
+    icon: `<path d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192l-3.536 3.536M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-5 0a4 4 0 11-8 0 4 4 0 018 0z"/>`,
+    desc: "We believe in long-term customer satisfaction. Our after-sales services include troubleshooting, product maintenance, and technical support to ensure the continued performance of your electrical systems.",
+    features: ["Dedicated technical support","Remote and on-site troubleshooting","Spare parts availability","Extended warranty options"]
+  },
+  {
+    title: "Maintenance Services",
+    icon: `<path d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"/>`,
+    desc: "Regular maintenance is key to longevity. We offer scheduled maintenance services to ensure your distribution boards and control panels operate at peak efficiency throughout their lifecycle.",
+    features: ["Scheduled preventive maintenance","Annual maintenance contracts","Performance monitoring","Priority response times"]
+  }
+];
+
+function toggleService(el, idx) {
+  document.querySelectorAll('.service-item').forEach(i => i.classList.remove('active'));
+  el.classList.add('active');
+  const s = serviceData[idx];
+  const showcase = document.getElementById('serviceShowcase');
+  showcase.innerHTML = `
+    <div class="service-showcase-icon"><svg viewBox="0 0 24 24" fill="none" stroke="var(--orange)" stroke-width="1.5">${s.icon}</svg></div>
+    <h3>${s.title}</h3>
+    <p>${s.desc}</p>
+    <div class="service-features">${s.features.map(f => `<span class="service-feature">${f}</span>`).join('')}</div>
+    <div style="margin-top:2rem"><a href="#contact" class="btn-primary" style="display:inline-block">Request Consultation</a></div>
+  `;
+}
+
+// Form submit
+function handleSubmit(btn) {
+  btn.textContent = '✓ Request Sent — We\'ll be in touch!';
+  btn.style.background = '#2d8a4e';
+  setTimeout(() => {
+    btn.textContent = 'Send Request →';
+    btn.style.background = '';
+  }, 4000);
+}
+
+// Smooth scroll for all anchors
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    e.preventDefault();
+    const target = document.querySelector(a.getAttribute('href'));
+    if(target) target.scrollIntoView({behavior:'smooth'});
+  });
+});
+</script>
+</body>
+</html>
